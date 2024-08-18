@@ -1,0 +1,29 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+  "name": "Web Frontend E2E Test Sample",
+  "dockerComposeFile": [
+    "../compose.yaml"
+  ],
+  "service": "web-app",
+  "workspaceFolder": "/home/pwuser/web-app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-playwright.playwright",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "editor.insertSpaces": true,
+        "editor.indentSize": 2,
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[typescriptreact]": {
+          "typescript.preferences.quoteStyle": "single"
+        }
+      }
+    }
+  }
+}
