@@ -3,6 +3,7 @@
   "name": "Web Frontend E2E Test Sample",
   "dockerComposeFile": [
     "../compose.yaml"
+    // "../pgadmin/compose.yaml"   // NOTE:「6.2.認証を伴うテスト」で使用
   ],
   "service": "web-app",
   "workspaceFolder": "/home/pwuser/web-app",
