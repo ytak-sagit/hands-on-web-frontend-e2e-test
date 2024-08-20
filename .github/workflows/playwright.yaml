@@ -39,7 +39,7 @@ jobs:
         working-directory: ./web-app
 
       - name: Install Playwright Browsers
-        run: npx playwright install-deps
+        run: npx playwright install --with-deps
         working-directory: ./web-app
 
       - name: Run Playwright tests
