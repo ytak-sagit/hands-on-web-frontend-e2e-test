@@ -35,7 +35,7 @@ jobs:
 
       # TODO: localhost 以外のURLに対してテスト実行するように要修正
       - name: Run WebApp at localhost
-        run: npm run dev:local
+        run: nohup npm run dev:local &
         working-directory: ./web-app
 
       - name: Install Playwright Browsers
