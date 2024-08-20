@@ -24,7 +24,7 @@ jobs:
       - name: Restore node_modules cache
         uses: actions/cache@v4
         with:
-          key: node-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: node-${{ runner.os }}-${{ hashFiles('./web-app/package-lock.json') }}
           path: ./web-app/node_modules
           restore-keys: |
             node-${{ runner.os }}-
