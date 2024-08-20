@@ -22,7 +22,7 @@ test("フォーム操作のテスト", async ({ page }) => {
   );
 });
 
-test.only("スクリーンショット", async ({ page }, testInfo) => {
+test("スクリーンショット", async ({ page }, testInfo) => {
   // ページ遷移してスクリーンショットを取得
   await page.goto("/form");
   const buffer = await page.screenshot();
