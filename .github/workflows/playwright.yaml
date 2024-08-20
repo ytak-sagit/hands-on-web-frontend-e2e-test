@@ -1,0 +1,58 @@
+name: Playwright Tests
+run-name: Playwright Tests
+on: push
+  # push:
+  #   branches: [main, master]
+  # pull_request:
+  #   branches: [main, master]
+jobs:
+  test:
+    # 実行時間が10分を超えた場合に停止
+    timeout-minutes: 10
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Restore node_modules cache
+        id: cache-restore
+        uses: actions/cache@v4
+        with:
+          key: node-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          path: '**/node_modules'
+
+      - name: Install dependencies
+        if: steps.cache-restore.outputs.cache-hit != 'true'
+        run: npm ci
+        working-directory: ./web-app
+
+      # TODO: localhost 以外のURLに対してテスト実行するように要修正
+      - name: Run WebApp at localhost
+        run: nohup npm run dev:local &
+        working-directory: ./web-app
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+        working-directory: ./web-app
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
+        env:
+          HEADLESS: true
+        working-directory: ./web-app
+
+      # テスト結果のアップロード
+      - name: Upload test reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: ./web-app/playwright-report/
+          retention-days: 3
